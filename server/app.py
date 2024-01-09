@@ -13,12 +13,18 @@ def print_string(parameter):
 
 @app.route("/count/<int:parameter>")
 def count(parameter):
-    numbers = '\n'.join(str(i) for i in range(1, parameter + 1))
+    numbers = ''
+    for i in range(0, parameter + 1):
+        numbers += str(i) + '<br>'
     return numbers
+
 
 @app.route("/math/<int:num1>/<operation>/<int:num2>")
 def math(num1, operation, num2):
-    result = ""
+    result = 0
+    num1 = int(num1)
+    num2 = int(num2)
+
     if operation == "+":
         result = num1 + num2
     elif operation == "-":
@@ -34,7 +40,10 @@ def math(num1, operation, num2):
         result = num1 % num2
     else:
         return "<h1>Error: Invalid operation</h1>"
-    return f"<h1>Result: {result}</h1>"
+    return f"{result}"
+
+
+
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
